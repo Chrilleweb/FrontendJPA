@@ -1,6 +1,7 @@
 console.log("jeg er i postregion")
 
 const pbPostRegion = document.getElementById("pbPostRegion")
+const pbPutRegion = document.getElementById("pbPutRegion")
 
 const inpKode = document.getElementById("inpKode")
 const inpName = document.getElementById("inpName")
@@ -24,6 +25,12 @@ async function postRegion() {
     if (res.ok) {
         alert("Region saved")
     }
+}
+
+async function putRegion(){
+    const updateRegion = getRegion()
+    const putUrl = regionUrl + "/" + updateRegion.kode
+    const res = await postObjectAsJson(putUrl, updateRegion, "PUT")
 }
 
 async function postObjectAsJson(url, object, httpVerbum) {
@@ -69,6 +76,12 @@ function actionPostRegion() {
     console.log("hej nu har jeg postet")
 }
 
+function actionPutRegion() {
+    putRegion()
+    console.log("hej nu opdateret")
+}
+
 
 pbPostRegion.addEventListener('click', actionPostRegion)
+pbPutRegion.addEventListener('click', actionPutRegion)
 
